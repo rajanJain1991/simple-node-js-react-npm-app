@@ -15,7 +15,7 @@ pipeline {
                 sh 'pwd' 
                 sh 'cd ..'
                 sh 'pwd' 
-                sh 'public' 
+                sh 'cd public' 
                 sh 'pwd'
                 sh 'cd ..'
             }
