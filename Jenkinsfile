@@ -11,13 +11,10 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh 'cd ./public/'
-                sh 'pwd' 
-                sh 'cd ..'
-                sh 'pwd' 
-                sh 'cd public' 
-                sh 'pwd'
-                sh 'cd ..'
+                sshagent (credentials: ['dev-test-server-ssh-access']) {
+                    sh "ssh -vvv -o StrictHostKeyChecking=no -T ubuntu@35.158.52.243"
+                    sh "ls"
+                } 
             }
         }
     }
