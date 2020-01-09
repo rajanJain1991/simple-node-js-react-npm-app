@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'node:6-alpine'
+            image 'node'
             args '-p 3000:3000'
         }
     }
@@ -15,9 +15,11 @@ pipeline {
             }
         }
         stage('Test') {
-            agent any
             steps {
-                sh 'ls -al'
+                sshagent (credentials: ['dev-test-server-ssh-access']) {
+                    sh "ssh -vvv -o StrictHostKeyChecking=no -T ubuntu@35.158.52.243"
+                    sh "ls"
+                }
             }
         }
         stage('Deliver') {
