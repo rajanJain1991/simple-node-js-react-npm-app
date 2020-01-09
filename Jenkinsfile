@@ -1,14 +1,11 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:6-alpine' 
-            args '-p 3000:3000' 
-        }
-    }
+    agent none
+    
     environment {
         CI = 'true'
     }
     stages {
+        
         stage('Build') { 
             steps {
                 sshagent (credentials: ['dev-test-server-ssh-access']) {
